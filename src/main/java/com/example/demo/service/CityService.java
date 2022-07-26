@@ -2,20 +2,18 @@ package com.example.demo.service;
 
 import com.example.demo.model.City;
 import com.example.demo.repositories.CityRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class CityService implements ICityService{
+public class CityService {
 
-    private final CityRepository cityRepository;
+    @Autowired
+    CityRepository cityRepository;
 
-    public CityService(CityRepository repository) {
-        this.cityRepository = repository;
-    }
-
-    public List<City> findAll() {
-        return cityRepository.findCity();
+    public List<City> getAllCity() {
+        return cityRepository.findAll();
     }
 }

@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.service.CityService;
 import com.example.demo.util.GeneratePdfReport;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -15,16 +16,13 @@ import java.io.ByteArrayInputStream;
 @Controller
 public class CityController {
 
-    private final CityService cityService;
-
-    public CityController(CityService cityService) {
-        this.cityService = cityService;
-    }
+    @Autowired
+    CityService cityService;
 
     @RequestMapping(value = "/pdfconvert", method = RequestMethod.GET, produces = MediaType.APPLICATION_PDF_VALUE)
     public ResponseEntity<InputStreamResource> citiesReport() {
 
-        var cities = cityService.findAll();
+        var cities = cityService.getAllCity();
 
         ByteArrayInputStream bis = GeneratePdfReport.citiesReport(cities);
 
